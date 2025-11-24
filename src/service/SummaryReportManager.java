@@ -1,8 +1,12 @@
+package service;
+
+import entities.Emergency;
+import entities.Unit;
 
 /**
  * In-memory live stats and console reporting.
  */
-class SummaryReportManager {
+public class SummaryReportManager {
   int totalEmergenciesRegistered;
   int totalDispatches;
   int totalCompletions;
@@ -11,12 +15,12 @@ class SummaryReportManager {
   String[] utilizedIds; // track IDs to avoid double count
   int utilizedCount;
 
-  SummaryReportManager() {
+  public SummaryReportManager() {
     utilizedIds = new String[16];
     utilizedCount = 0;
   }
 
-  void recordRegistration(Emergency e) {
+  public void recordRegistration(Emergency e) {
     totalEmergenciesRegistered++;
   }
 
@@ -51,7 +55,7 @@ class SummaryReportManager {
     return ((double) sumResponseCost) / ((double) totalDispatches);
   }
 
-  void printLiveSummary() {
+  public void printLiveSummary() {
     System.out.println("=== Live Summary ===");
     System.out.println("Emergencies Registered: " + totalEmergenciesRegistered);
     System.out.println("Dispatches: " + totalDispatches);

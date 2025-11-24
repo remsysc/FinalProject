@@ -1,11 +1,18 @@
+import entities.*;
+import entities.graph.CityGraph;
+import service.*;
 
 public class Main {
   public static void main(String[] args) {
     // Build systems
-    EmergencyBST bst = new EmergencyBST();
-    UnitMap units = new UnitMap(17);
+    EmergencyBSTService bst = new EmergencyBSTService();
+    UnitMap map = new UnitMap(17);
+    UnitMapServiceImpl units = new UnitMapServiceImpl(map);
     CityGraph graph = new CityGraph(8);
+    GraphServiceImpl graphService = new GraphServiceImpl(graph);
     SummaryReportManager reports = new SummaryReportManager();
+    DispatchEngineImpl dispatchEngine = new DispatchEngineImpl(bst, units,reports,graphService);
+    GraphVisualizer viz = new GraphVisualizer(graph);
 
     // Build city graph
     graph.addNode("HQ");
@@ -33,7 +40,7 @@ public class Main {
     units.put("M-02", new Unit("M-02", "medical", "Z12", "AVAILABLE"));
 
     // Run simulation
-    SimulationController sim = new SimulationController(bst, units, graph, reports);
+    SimulationController sim = new SimulationController(bst,units,graph,reports,dispatchEngine,viz);
     sim.generateEmergencies();
     sim.runOnce(); // render map, dispatch one, show summary
     sim.runBatch(3); // complete rest
