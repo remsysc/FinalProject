@@ -14,7 +14,7 @@ public class Unit {
     this.status = status;
   }
 
-  String summary() {
+  public String summary() {
     return "[Unit id=" + id + ", type=" + type + ", loc=" + location + ", status=" + status + "]";
   }
 }
