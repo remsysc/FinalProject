@@ -11,7 +11,7 @@ public class Main {
     CityGraph graph = new CityGraph(8);
     GraphServiceImpl graphService = new GraphServiceImpl(graph);
     SummaryReportManager reports = new SummaryReportManager();
-    DispatchEngineImpl dispatchEngine = new DispatchEngineImpl(bst, units,reports,graphService);
+    DispatchEngineImpl dispatchEngine = new DispatchEngineImpl(bst, units, reports, graphService);
     GraphVisualizer viz = new GraphVisualizer(graph);
 
     // Build city graph
@@ -40,7 +40,7 @@ public class Main {
     units.put("M-02", new Unit("M-02", "medical", "Z12", "AVAILABLE"));
 
     // Run simulation
-    SimulationController sim = new SimulationController(bst,units,graph,reports,dispatchEngine,viz);
+    SimulationController sim = new SimulationController(bst, units, reports, dispatchEngine, viz);
     sim.generateEmergencies();
     sim.runOnce(); // render map, dispatch one, show summary
     sim.runBatch(3); // complete rest
